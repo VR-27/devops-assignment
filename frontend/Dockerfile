@@ -8,10 +8,12 @@ RUN npm run build
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
-# Copy the build output to replace the default nginx contents.
-# NOTE: We use a wildcard (*) because Angular builds into 'dist/project-name'
+
+# Copy the build output
 COPY --from=build /app/dist/*/ /usr/share/nginx/html/
 
-# Expose port 80
+# COPY OUR NEW CONFIGURATION FILE:
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

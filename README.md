@@ -1,27 +1,31 @@
-In this DevOps task, you need to build and deploy a full-stack CRUD application using the MEAN stack (MongoDB, Express, Angular 15, and Node.js). The backend will be developed with Node.js and Express to provide REST APIs, connecting to a MongoDB database. The frontend will be an Angular application utilizing HTTPClient for communication.  
+# MEAN Stack DevOps Deployment
 
-The application will manage a collection of tutorials, where each tutorial includes an ID, title, description, and published status. Users will be able to create, retrieve, update, and delete tutorials. Additionally, a search box will allow users to find tutorials by title.
+A full-stack MEAN application (MongoDB, Express, Angular, Node.js) containerized with Docker and deployed to AWS EC2 using a CI/CD pipeline.
 
-## Project setup
+## 🚀 Tech Stack
+* **Frontend:** Angular (Served via Nginx Reverse Proxy)
+* **Backend:** Node.js & Express
+* **Database:** MongoDB (Docker Container)
+* **DevOps:** Docker, GitHub Actions, AWS EC2
 
-### Node.js Server
+## 🛠️ Setup & Deployment
 
-cd backend
+### 1. Prerequisites
+* An AWS EC2 instance (Ubuntu) with Ports `80` (HTTP) and `22` (SSH) open.
+* Docker and Docker Compose installed on the VM.
+* A Docker Hub account.
 
-npm install
+### 2. Repository Setup
+* Create a Github Repository
+* Add the Project
 
-You can update the MongoDB credentials by modifying the `db.config.js` file located in `app/config/`.
+### 3. CI/CD Configuration
+* The pipeline (.github/workflows/deploy.yml) automates the following:
+* Builds and Pushes Docker images to Docker Hub.
+* Connects to AWS EC2 via SSH.
+* Pulls new images and restarts containers.
 
-Run `node server.js`
-
-### Angular Client
-
-cd frontend
-
-npm install
-
-Run `ng serve --port 8081`
-
-You can modify the `src/app/services/tutorial.service.ts` file to adjust how the frontend interacts with the backend.
-
-Navigate to `http://localhost:8081/`
+### 4. Nginx Reverse Proxy
+* Nginx is configured to serve the application entirely on Port 80:
+* /: Serves the Angular Frontend.
+* /api: Proxies requests internally to the Node.js Backend

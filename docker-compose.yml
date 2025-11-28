@@ -12,7 +12,7 @@ services:
     build: ./backend
     container_name: backend
     ports:
-      - "8080:8080"  # Updated to match your server.js
+      - "8080:8080"  
     depends_on:
       - mongo
     environment:
